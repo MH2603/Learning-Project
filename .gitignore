@@ -78,3 +78,4 @@ crashlytics-build.properties
 .idea/
 *.TokenResponse-user
 Assets/GSpreadSheets/Editor/Google.Apis.Auth.OAuth2.Responses.TokenResponse-user.meta
+.vsconfig
