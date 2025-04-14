@@ -1,0 +1,29 @@
+﻿
+Dimensional : kích thức, chiều
+EX: A texture has 2 dimensional which include U and V dimensional
+
+ourselves : chính chúng ta
+EX: Let's begin by limiting ourselves to only the U dimension
+
+approximate : xấp xỉ
+
+tangent vector: vector tiếp tuyến
+
+The smallest sensible difference would cover a single texel of our texture : sự khác biệt nhỏ nhất hợp lý sẽ chỉ chiếm một texel trong texture
+"Texel" trong câu trên là viết tắt của "texture element" và ám chỉ đến một "pixel" trong một texture.
+
+retrieve : lấy, truy xuất
+suffix: hậu tố
+We can retrieve this information in the shader via a float4 variable with the _TexelSize suffix.
+
+fraction : phân số
+
+Now we can sample( sample: lấy mẫu ) the texture twice, compute the height derivative( derivative : đạo hàm )
+
+pronounced : rõ rệt
+Ex: We get a pronounced result
+
+waste : rác thải, lãng phí
+this seems like a waste : điều này trông thật lãng phí
+
+compress : nén
