@@ -1,0 +1,39 @@
+// Compute shader that generates a heatmap based on enemy positions
+// The heatmap visualizes areas of influence/density around enemy positions
+#pragma kernel CSMain
+
+// Output texture where the heatmap will be rendered
+RWTexture2D<float> heatmapTexture;
+// Size of the texture (width, height)
+float2 texSize;
+
+// Array of enemy positions in UV space
+StructuredBuffer<float2> enemyPositions;
+// Number of enemies in the buffer
+int enemyCount;
+
+// Define thread group size: 8x8 threads in 2D (total 64 threads per group)
+[numthreads(8, 8, 1)]
+void CSMain(uint3 id : SV_DispatchThreadID)
+{
+    // Convert thread ID to pixel coordinates
+    int2 pixel = int2(id.xy);
+    float2 uv = pixel;
+    float heat = 0;
+
+    // Calculate cumulative heat value from all enemy positions
+    for (int i = 0; i < enemyCount; i++) {
+        float2 enemyPos = enemyPositions[i];
+        // Calculate distance from current pixel to enemy position
+        float dist = distance(uv, enemyPos);
+        // Define influence radius of each enemy
+        float radius = 20.0;
+        // Add heat contribution using linear falloff based on distance
+        heat += saturate(1.0 - dist / radius); // Clamps value between 0 and 1
+    }
+
+    // Ensure final heat value is between 0 and 1
+    heat = saturate(heat);
+    // Write the computed heat value to the output texture
+    heatmapTexture[pixel] = heat;
+}
